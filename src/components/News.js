@@ -8,7 +8,7 @@ const News = (props) => {
     const capitalize = (string)=>{
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    const [articles, setArticles] = useState([]);
+    const [articles?, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [totalArticles, tsetTotalArticles] = useState(0);
@@ -23,7 +23,7 @@ const News = (props) => {
         let parsedData = await data.json();
         props.setProgress(70);
         console.log(parsedData);
-        setArticles(parsedData.articles);
+        setArticles(parsedData.articles?);
         tsetTotalArticles(parsedData.totalArticles);
         setLoading(false);
         props.setProgress(100);
@@ -43,7 +43,7 @@ const News = (props) => {
         let data = await fetch(apiUrl);
         let parsedData = await data.json();
         console.log(parsedData);
-        setArticles(articles.concat(parsedData.articles));
+        setArticles(articles?.concat(parsedData.articles?));
         tsetTotalArticles(parsedData.totalArticles);
       };
 
@@ -59,7 +59,7 @@ const News = (props) => {
         >
         <div className="conatiner mx-5">
       <div className="row my-3">
-      {articles.map((element)=>{
+      {articles?.map((element)=>{
         return <div className="col-md-4 my-3" key={element.url}>
             <NewsItem title={element.title} description={element.description} imageUrl={element.urlToImage ? element.urlToImage : "https://i.stack.imgur.com/l60Hf.png"} newsUrl={element.url} author={element.author} source={element.source.name} date={element.publishedAt}/>
                </div>
